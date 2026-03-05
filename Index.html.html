@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TRP Daily Review Intelligence — March 3, 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700&family=DM+Mono:wght@400;500&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1A1A1A;
+    --paper: #F8F7F4;
+    --white: #FFFFFF;
+    --stone-100: #F5F5F4;
+    --stone-200: #E7E5E4;
+    --stone-300: #D6D3D1;
+    --stone-400: #A8A29E;
+    --stone-500: #78716C;
+    --stone-600: #57534E;
+    --red-50: #FEF2F2;
+    --red-100: #FEE2E2;
+    --red-200: #FECACA;
+    --red-600: #DC2626;
+    --red-800: #991B1B;
+    --amber-50: #FFFBEB;
+    --amber-100: #FEF3C7;
+    --amber-200: #FDE68A;
+    --amber-600: #D97706;
+    --amber-800: #92400E;
+    --green-50: #ECFDF5;
+    --green-100: #D1FAE5;
+    --green-200: #A7F3D0;
+    --green-600: #059669;
+    --green-800: #065F46;
+    --violet-600: #7C3AED;
+    --font-display: 'Playfair Display', Georgia, serif;
+    --font-body: 'DM Sans', 'Helvetica Neue', Helvetica, sans-serif;
+    --font-mono: 'DM Mono', 'Menlo', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: var(--ink);
+    color: #FAFAF9;
+    padding: 32px 40px 28px;
+  }
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .header-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--stone-400);
+    margin-bottom: 6px;
+  }
+  .header-title {
+    font-family: var(--font-display);
+    font-size: 30px;
+    font-weight: 900;
+    line-height: 1.1;
+  }
+  .header-score {
+    text-align: right;
+  }
+  .header-score-num {
+    font-family: var(--font-display);
+    font-size: 40px;
+    font-weight: 900;
+    line-height: 1;
+  }
+  .header-score-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--stone-400);
+    margin-top: 2px;
+  }
+  .header-trend {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 700;
+  }
+  .header-trend.down { color: #F87171; }
+  .header-trend.up { color: #34D399; }
+
+  .stats-strip {
+    display: flex;
+    gap: 32px;
+    margin-top: 24px;
+    flex-wrap: wrap;
+  }
+  .stat-item {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+  .stat-num {
+    font-family: var(--font-mono);
+    font-size: 24px;
+    font-weight: 700;
+  }
+  .stat-label {
+    font-size: 12px;
+    color: var(--stone-400);
+  }
+
+  /* ── MAIN ── */
+  .main {
+    max-width: 920px;
+    padding: 28px 40px 60px;
+  }
+
+  /* ── SECTION HEADERS ── */
+  .section-header {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin: 0 0 18px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-header.critical { color: var(--red-600); }
+  .section-header.warning { color: var(--amber-600); }
+  .section-header.neutral { color: var(--stone-500); }
+  .section-header.positive { color: var(--green-600); }
+
+  .pulse-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: var(--red-600);
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.25} }
+
+  /* ── ALERT CARDS ── */
+  .alert-card {
+    background: var(--white);
+    border-radius: 10px;
+    padding: 22px 24px;
+    margin-bottom: 14px;
+    cursor: pointer;
+    transition: box-shadow 0.25s ease, transform 0.15s ease;
+    user-select: none;
+  }
+  .alert-card:hover {
+    transform: translateY(-1px);
+  }
+  .alert-card.critical {
+    border: 1px solid var(--red-200);
+    border-left: 5px solid var(--red-600);
+  }
+  .alert-card.critical:hover { box-shadow: 0 6px 20px rgba(220,38,38,0.08); }
+  .alert-card.warning {
+    border: 1px solid var(--amber-200);
+    border-left: 5px solid var(--amber-600);
+  }
+  .alert-card.warning:hover { box-shadow: 0 6px 20px rgba(217,119,6,0.08); }
+
+  .alert-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  .alert-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 2px 10px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border-radius: 4px;
+    font-family: var(--font-mono);
+  }
+  .badge.critical { background: var(--red-100); color: var(--red-800); border: 1px solid var(--red-200); }
+  .badge.warning { background: var(--amber-100); color: var(--amber-800); border: 1px solid var(--amber-200); }
+  .badge.high { background: var(--red-100); color: var(--red-800); }
+  .badge.medium { background: var(--amber-100); color: var(--amber-800); }
+
+  .restaurant-tag {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--stone-500);
+  }
+
+  .chevron {
+    font-size: 20px;
+    color: var(--stone-300);
+    transition: transform 0.25s ease;
+    line-height: 1;
+  }
+  .alert-card.open .chevron { transform: rotate(180deg); }
+
+  .alert-title {
+    font-size: 16px;
+    font-weight: 700;
+    margin: 6px 0;
+    line-height: 1.3;
+  }
+  .alert-summary {
+    font-size: 14px;
+    color: var(--stone-600);
+    line-height: 1.55;
+    margin-bottom: 12px;
+  }
+
+  .action-box {
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.5;
+  }
+  .action-box.critical { background: var(--red-50); color: var(--red-800); }
+  .action-box.warning { background: var(--amber-50); color: var(--amber-800); }
+  .action-box strong { font-weight: 700; }
+
+  /* ── EXPANDABLE REVIEWS ── */
+  .reviews-panel {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, opacity 0.3s ease;
+    opacity: 0;
+  }
+  .alert-card.open .reviews-panel {
+    max-height: 600px;
+    opacity: 1;
+  }
+  .reviews-divider {
+    border-top: 1px solid var(--red-100);
+    margin-top: 16px;
+    padding-top: 14px;
+  }
+  .reviews-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--stone-400);
+    margin-bottom: 10px;
+  }
+  .review-item {
+    background: var(--stone-100);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-bottom: 8px;
+    border-left: 3px solid var(--red-200);
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  .review-meta {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 6px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--stone-500);
+    flex-wrap: wrap;
+  }
+  .review-stars { color: #F59E0B; letter-spacing: 1px; }
+  .review-text { color: var(--stone-600); font-style: italic; }
+
+  /* ── SCOREBOARD ── */
+  .scoreboard {
+    background: var(--white);
+    border-radius: 10px;
+    border: 1px solid var(--stone-200);
+    overflow: hidden;
+  }
+  .scoreboard-header {
+    display: grid;
+    grid-template-columns: 1.4fr 100px 55px 95px 70px;
+    padding: 12px 24px;
+    background: var(--stone-100);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--stone-400);
+  }
+  .scoreboard-row {
+    display: grid;
+    grid-template-columns: 1.4fr 100px 55px 95px 70px;
+    padding: 15px 24px;
+    align-items: center;
+    border-top: 1px solid var(--stone-100);
+    transition: background 0.15s;
+  }
+  .scoreboard-row:hover { background: var(--stone-100); }
+  .scoreboard-row.alert-row { background: var(--red-50); }
+  .scoreboard-row.alert-row:hover { background: var(--red-100); }
+
+  .rest-name { font-size: 14px; font-weight: 600; }
+  .cell-center { text-align: center; }
+  .cell-right { text-align: right; }
+
+  .rating-bar-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .rating-bar-track {
+    flex: 1;
+    height: 5px;
+    background: var(--stone-200);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .rating-bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.8s ease;
+  }
+  .rating-bar-fill.excellent { background: var(--green-600); }
+  .rating-bar-fill.good { background: var(--amber-600); }
+  .rating-bar-fill.poor { background: var(--red-600); }
+  .rating-num {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 700;
+    min-width: 32px;
+    text-align: right;
+  }
+  .rating-num.excellent { color: var(--green-600); }
+  .rating-num.good { color: var(--amber-600); }
+  .rating-num.poor { color: var(--red-600); }
+
+  .count-cell {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--stone-500);
+    text-align: center;
+  }
+
+  .trend {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 700;
+  }
+  .trend.up { color: var(--green-600); }
+  .trend.down { color: var(--red-600); }
+  .trend.flat { color: var(--stone-500); }
+
+  .status-dot {
+    font-size: 12px;
+    font-weight: 700;
+    text-align: right;
+  }
+  .status-dot.excellent { color: var(--green-600); }
+  .status-dot.solid { color: var(--stone-500); }
+  .status-dot.watch { color: var(--amber-600); }
+  .status-dot.alert { color: var(--red-600); }
+
+  /* ── TRENDING ── */
+  .trend-card {
+    background: var(--white);
+    border-radius: 10px;
+    padding: 18px 22px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .trend-card.high { border: 1px solid var(--red-200); }
+  .trend-card.medium { border: 1px solid var(--stone-200); }
+  .trend-title { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+  .trend-detail { font-size: 12px; color: var(--stone-500); line-height: 1.5; }
+
+  /* ── WINS ── */
+  .wins-box {
+    background: var(--green-50);
+    border: 1px solid var(--green-200);
+    border-radius: 10px;
+    padding: 24px;
+  }
+  .win-line {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--green-800);
+    margin-bottom: 6px;
+  }
+  .win-line:last-child { margin-bottom: 0; }
+  .win-line strong { font-weight: 700; }
+
+  /* ── FOOTER ── */
+  .footer {
+    border-top: 1px solid var(--stone-200);
+    margin-top: 40px;
+    padding-top: 18px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--stone-400);
+  }
+
+  section { margin-bottom: 36px; }
+
+  /* ── PRINT ── */
+  @media print {
+    .alert-card { break-inside: avoid; }
+    .reviews-panel { max-height: none !important; opacity: 1 !important; }
+    .chevron { display: none; }
+    body { background: #fff; }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 700px) {
+    .header { padding: 24px 20px 20px; }
+    .main { padding: 20px 20px 40px; }
+    .header-title { font-size: 24px; }
+    .header-score-num { font-size: 32px; }
+    .stats-strip { gap: 20px; }
+    .scoreboard-header, .scoreboard-row {
+      grid-template-columns: 1fr 80px 45px 75px;
+    }
+    .scoreboard-header > :last-child,
+    .scoreboard-row > :last-child { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ════════════════ HEADER ════════════════ -->
+<div class="header">
+  <div class="header-top">
+    <div>
+      <div class="header-label">TRP Daily Review Intelligence</div>
+      <h1 class="header-title">Monday, March 3, 2026</h1>
+    </div>
+    <div class="header-score">
+      <div class="header-score-num">4.46</div>
+      <div class="header-score-label">GROUP AVG (41 reviews)</div>
+      <div class="header-trend down">▼ vs 4.63 weekly</div>
+    </div>
+  </div>
+  <div class="stats-strip">
+    <div class="stat-item">
+      <span class="stat-num" style="color:#EF4444">3</span>
+      <span class="stat-label">Critical Reviews (≤2★)</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num" style="color:#10B981">30</span>
+      <span class="stat-label">Positive (≥4★)</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num" style="color:#F59E0B">2</span>
+      <span class="stat-label">Active Alerts</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num" style="color:#8B5CF6">4</span>
+      <span class="stat-label">Trending Issues</span>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════ MAIN ════════════════ -->
+<div class="main">
+
+  <!-- ── IMMEDIATE ACTION ── -->
+  <section>
+    <h2 class="section-header critical">
+      <span class="pulse-dot"></span>
+      Immediate Action Required
+    </h2>
+
+    <!-- Alert 1: YOLO -->
+    <div class="alert-card critical" onclick="this.classList.toggle('open')">
+      <div class="alert-top">
+        <div class="alert-meta">
+          <span class="badge critical">Critical</span>
+          <span class="restaurant-tag">YOLO Restaurant</span>
+        </div>
+        <span class="chevron">▾</span>
+      </div>
+      <div class="alert-title">Two 1-Star Reviews — Food Quality & Wait Times</div>
+      <p class="alert-summary">Two guests independently flagged food quality as "commercial" and "mediocre." One waited 45 min despite a reservation. Both cite overpricing. Today's avg dropped to 4.00 from a 4.82 weekly baseline.</p>
+      <div class="action-box critical">
+        <strong>→ Action:</strong> GM to review kitchen line for Mar 1 dinner service. Check reservation pacing — 45-min wait with a reservation is unacceptable. Pricing perception issue is recurring and needs a menu-value audit.
+      </div>
+      <div class="reviews-panel">
+        <div class="reviews-divider">
+          <div class="reviews-label">Source Reviews</div>
+          <div class="review-item">
+            <div class="review-meta">
+              <span>Chris</span>
+              <span class="review-stars">★☆☆☆☆</span>
+              <span>Food: 1/5</span>
+              <span>Service: 3/5</span>
+              <span>Visit: Mar 1</span>
+            </div>
+            <div class="review-text">"The food was commercial food quality, and not worth my time and effort to be there."</div>
+          </div>
+          <div class="review-item">
+            <div class="review-meta">
+              <span>Brian</span>
+              <span class="review-stars">★☆☆☆☆</span>
+              <span>Food: 2/5</span>
+              <span>Service: 2/5</span>
+              <span>Visit: Feb 20</span>
+            </div>
+            <div class="review-text">"Overpriced, poor quality. Had to wait 45 minutes despite reservation. Bad service; mediocre food. Absolutely skip if you're looking for an upscale, mature dinner."</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Alert 2: Casablanca -->
+    <div class="alert-card critical" onclick="this.classList.toggle('open')">
+      <div class="alert-top">
+        <div class="alert-meta">
+          <span class="badge critical">Critical</span>
+          <span class="restaurant-tag">Casablanca Café</span>
+        </div>
+        <span class="chevron">▾</span>
+      </div>
+      <div class="alert-title">Repeat Guest Leaving — Food Quality Collapsed</div>
+      <p class="alert-summary">Long-time regular reports food is now "horrible." Ceviche, soup, and mains all had issues (over-salted, undercooked). Rating dropped from 4.50 weekly avg to 2.00 today. This is the 4th critical review in 7 days — all citing food decline.</p>
+      <div class="action-box critical">
+        <strong>→ Action:</strong> Kitchen audit needed immediately. Check for chef staffing changes and prep standard drift. This is a loyal guest saying "it will be a long time before we come back" — that's lost lifetime revenue.
+      </div>
+      <div class="reviews-panel">
+        <div class="reviews-divider">
+          <div class="reviews-label">Source Reviews</div>
+          <div class="review-item">
+            <div class="review-meta">
+              <span>Brian M.</span>
+              <span class="review-stars">★★☆☆☆</span>
+              <span>Visit: Recent</span>
+            </div>
+            <div class="review-text">"The food this time was horrible. Ceviche in tomato sauce — certainly not the traditional. Soup was horrible, dishes seriously over salted or undercooked. It will be a long time before we come back. Sad!"</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── WATCH LIST ── -->
+  <section>
+    <h2 class="section-header warning">⚡ Watch List</h2>
+
+    <div class="alert-card warning" onclick="this.classList.toggle('open')">
+      <div class="alert-top">
+        <div class="alert-meta">
+          <span class="badge warning">Warning</span>
+          <span class="restaurant-tag">Giselle Miami</span>
+        </div>
+        <span class="chevron">▾</span>
+      </div>
+      <div class="alert-title">Menu Item Misrepresentation — Duck Dish</div>
+      <div class="reviews-panel">
+        <p class="alert-summary" style="margin-top:8px">Guest says the "pecking style duck" is "most certainly chicken." 3-star review. If it reads as chicken to guests, it's a menu credibility issue that can spread on social media.</p>
+        <div class="action-box warning">
+          <strong>→ Action:</strong> Verify duck sourcing and prep with kitchen. If the protein doesn't deliver on the menu promise, it needs to be fixed or pulled.
+        </div>
+      </div>
+    </div>
+
+    <div class="alert-card warning" onclick="this.classList.toggle('open')">
+      <div class="alert-top">
+        <div class="alert-meta">
+          <span class="badge warning">Warning</span>
+          <span class="restaurant-tag">S3 Restaurant</span>
+        </div>
+        <span class="chevron">▾</span>
+      </div>
+      <div class="alert-title">Former Regular — Service Slipping Despite Great Location</div>
+      <div class="reviews-panel">
+        <p class="alert-summary" style="margin-top:8px">A guest who used to celebrate birthdays at S3 says "food and service started slipping." Stopped in recently and bar service wasn't great. 3 stars. This guest represents lost recurring group spend.</p>
+        <div class="action-box warning">
+          <strong>→ Action:</strong> Bar staff performance review. Track how many "used to come here" reviews appear — this is a churn signal.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── RESTAURANT SCOREBOARD ── -->
+  <section>
+    <h2 class="section-header neutral">Restaurant Scoreboard</h2>
+    <div class="scoreboard">
+      <div class="scoreboard-header">
+        <span>Restaurant</span>
+        <span class="cell-center">Today</span>
+        <span class="cell-center">#</span>
+        <span>vs Weekly</span>
+        <span class="cell-right">Status</span>
+      </div>
+
+      <!-- Java & Jam -->
+      <div class="scoreboard-row">
+        <span class="rest-name">Java & Jam</span>
+        <span class="rating-bar-wrap">
+          <span class="rating-bar-track"><span class="rating-bar-fill excellent" style="width:100%"></span></span>
+          <span class="rating-num excellent">5.00</span>
+        </span>
+        <span class="count-cell">9</span>
+        <span class="trend up">▲ +0.26</span>
+        <span class="status-dot excellent cell-right">● Great</span>
+      </div>
+
+      <!-- Nubé Rooftop -->
+      <div class="scoreboard-row">
+        <span class="rest-name">Nubé Rooftop</span>
+        <span class="rating-bar-wrap">
+          <span class="rating-bar-track"><span class="rating-bar-fill excellent" style="width:100%"></span></span>
+          <span class="rating-num excellent">5.00</span>
+        </span>
+        <span class="count-cell">2</span>
+        <span class="trend up">▲ +0.69</span>
+        <span class="status-dot excellent cell-right">● Great</span>
+      </div>
+
+      <!-- Boatyard -->
+      <div class="scoreboard-row">
+        <span class="rest-name">Boatyard</span>
+        <span class="rating-bar-wrap">
+          <span class="rating-bar-track"><span class="rating-bar-fill excellent" style="width:96.6%"></span></span>
+          <span class="rating-num excellent">4.83</span>
+        </span>
+        <span class="count-cell">6</span>
+        <span class="trend up">▲ +0.25</span>
+        <span class="status-dot solid cell-right">● Solid</span>
+      </div>
+
+      <!-- S3 Restaurant -->
+      <div class="scoreboard-row">
+        <span class="rest-name">S3 Restaurant</span>
+        <span class="rating-bar-wrap">
+          <span class="rating-bar-track"><span class="rating-bar-fill excellent" style="width:91.2%"></span></span>
+          <span class="rating-num excellent">4.56</span>
+        </span>
+        <span class="count-cell">9</span>
+        <span class="trend flat">→ +0.09</span>
+        <span class="status-dot solid cell-right">● Solid</span>
+      </div>
+
+      <!-- Rosa Sky -->
+      <div class="scoreboard-row">
+        <span class="rest-name">Rosa Sky Rooftop</span>
+        <span class="rating-bar-wrap">
+          <span class="rating-bar-track"><span class="rating-bar-fill good" style="width:80%"></span></span>
+          <span class="rating-num good">4.00</span>
+        </span>
+        <span class="count-cell">1</span>
+        <span class="trend down">▼ −0.96</span>
+        <span class="status-dot watch cell-right">● Watch</span>
+      </div>
+
+      <!-- Giselle Miami -->
+      <div class="scoreboard-row">
+        <span class="rest-name">Giselle Miami</span>
+        <span class="rating-bar-wrap">
+          <span class="rating-bar-track"><span class="rating-bar-fill good" style="width:80%"></span></span>
+          <span class="rating-num good">4.00</span>
+        </span>
+        <span class="count-cell">2</span>
+        <span class="trend down">▼ −0.75</span>
+        <span class="status-dot watch cell-right">● Watch</span>
+      </div>
+
+      <!-- YOLO -->
+      <div class="scoreboard-row alert-row">
+        <span class="rest-name">YOLO Restaurant</span>
+        <span class="rating-bar-wrap">
+          <span class="rating-bar-track"><span class="rating-bar-fill good" style="width:80%"></span></span>
+          <span class="rating-num good">4.00</span>
+        </span>
+        <span class="count-cell">11</span>
+        <span class="trend down">▼ −0.82</span>
+        <span class="status-dot alert cell-right">● Alert</span>
+      </div>
+
+      <!-- Casablanca -->
+      <div class="scoreboard-row alert-row">
+        <span class="rest-name">Casablanca Café</span>
+        <span class="rating-bar-wrap">
+          <span class="rating-bar-track"><span class="rating-bar-fill poor" style="width:40%"></span></span>
+          <span class="rating-num poor">2.00</span>
+        </span>
+        <span class="count-cell">1</span>
+        <span class="trend down">▼ −2.50</span>
+        <span class="status-dot alert cell-right">● Alert</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── TRENDING ISSUES ── -->
+  <section>
+    <h2 class="section-header neutral">Trending Issues — 7-Day Patterns</h2>
+
+    <div class="trend-card high">
+      <div>
+        <div class="trend-title">Casablanca food quality decline</div>
+        <div class="trend-detail">4 critical reviews in 7 days — Long-time regulars explicitly saying they won't return</div>
+      </div>
+      <span class="badge high">High</span>
+    </div>
+
+    <div class="trend-card high">
+      <div>
+        <div class="trend-title">Nubé Rooftop door staff complaints</div>
+        <div class="trend-detail">3 reviews citing rude hostesses in weekly data — Multiple guests mention female door staff specifically, one alleges discrimination</div>
+      </div>
+      <span class="badge high">High</span>
+    </div>
+
+    <div class="trend-card medium">
+      <div>
+        <div class="trend-title">YOLO value perception problem</div>
+        <div class="trend-detail">Recurring across multiple days — "Overpriced" + "mediocre food" appearing together in independent reviews</div>
+      </div>
+      <span class="badge medium">Medium</span>
+    </div>
+
+    <div class="trend-card medium">
+      <div>
+        <div class="trend-title">S3 reservation & wait time issues</div>
+        <div class="trend-detail">2-3 mentions in past week — Guests with reservations still waiting 30-45 min, seating policy confusion</div>
+      </div>
+      <span class="badge medium">Medium</span>
+    </div>
+  </section>
+
+  <!-- ── WINS ── -->
+  <section>
+    <h2 class="section-header positive">✓ Today's Wins</h2>
+    <div class="wins-box">
+      <div class="win-line"><strong>Java & Jam</strong> — Perfect 5.0 across 9 reviews. Third consecutive day at 5.0. Whatever they're doing, bottle it.</div>
+      <div class="win-line"><strong>Nubé Rooftop</strong> — Jumped from 4.31 weekly avg to 5.0 today. Two reviews, both perfect. Door staff issues from last week may be resolving.</div>
+      <div class="win-line"><strong>Boatyard</strong> — Bounced back to 4.83 after dipping to 4.18 on Mar 2. Strong recovery.</div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <div class="footer">
+    <span>TRP Review Intelligence — Generated March 3, 2026 · 6:00 AM</span>
+    <span>Data source: OpenTable · 10 restaurants</span>
+  </div>
+
+</div>
+
+</body>
+</html>
